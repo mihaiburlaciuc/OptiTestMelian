@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OptiTestMelian</string>
+    <string name="alert_dialog_text">Content is not valid. Click outside the dialog to dismiss this</string>
 </resources>

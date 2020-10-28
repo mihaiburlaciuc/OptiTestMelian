@@ -2,7 +2,6 @@ package com.example.optitestmelian.presenter;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.example.optitestmelian.model.Constants;
 import com.example.optitestmelian.view.MainActivity;
@@ -14,7 +13,6 @@ import java.security.NoSuchAlgorithmException;
 public class MainPresenter implements MainPresenterI {
     MainActivity mainActivity;
     private static final String WEBSITE_HASH_KEY = "WEBSITE_HASH_KEY";
-    private static final String MAIN_PRESENTER_TAG = "MAIN_PRESENTER_TAG";
 
     public MainPresenter(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
@@ -33,8 +31,6 @@ public class MainPresenter implements MainPresenterI {
             messageDigest.update(s.getBytes());
             String stringHash = new String(messageDigest.digest());
 
-            Log.d("TAG", stringHash);
-
             return stringHash;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -50,18 +46,13 @@ public class MainPresenter implements MainPresenterI {
         String savedWebsiteHash = getSavedWebsiteHash();
         if (savedWebsiteHash == null) {
             // Saving website hash for the first time
-            Log.d(MAIN_PRESENTER_TAG, "savedWebsiteHash == null");
             saveWebsiteHash(currentWebsiteHash);
         } else if (!savedWebsiteHash.equals(currentWebsiteHash)) {
-            Log.d(MAIN_PRESENTER_TAG, "savedWebsiteHash != currentWebsiteHash");
             mainActivity.alertContentIsNotValid();
-        } else {
-            Log.d(MAIN_PRESENTER_TAG, "savedWebsiteHash == currentWebsiteHash");
         }
     }
 
     private void saveWebsiteHash(String websiteHash) {
-        Log.d(MAIN_PRESENTER_TAG, "saveWebSiteHash: "  + websiteHash);
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(mainActivity.getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
@@ -73,7 +64,6 @@ public class MainPresenter implements MainPresenterI {
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(mainActivity.getApplicationContext());
         String savedWebsiteHash = preferences.getString(WEBSITE_HASH_KEY, null);
-        Log.d(MAIN_PRESENTER_TAG, "getSavedWebsiteHash: "  + savedWebsiteHash);
 
         return savedWebsiteHash;
     }

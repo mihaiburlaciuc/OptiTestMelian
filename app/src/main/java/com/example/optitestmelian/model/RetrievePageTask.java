@@ -1,7 +1,6 @@
 package com.example.optitestmelian.model;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.optitestmelian.presenter.MainPresenterI;
 
@@ -13,7 +12,6 @@ import java.net.URLConnection;
 
 public class RetrievePageTask extends AsyncTask<String, Void, String> {
     private MainPresenterI mainPresenter;
-    private static final String TAG = "RetrievePageTask_TAG";
 
     public RetrievePageTask(MainPresenterI mainPresenter) {
         this.mainPresenter = mainPresenter;
@@ -23,7 +21,6 @@ public class RetrievePageTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... strings) {
         try {
             String result = getHTML(strings[0]);
-            Log.d(TAG, result);
 
             return result;
         } catch (IOException e) {
@@ -49,7 +46,6 @@ public class RetrievePageTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-        Log.d(TAG, "post executed");
         mainPresenter.receiveWebsiteResponse(s);
     }
 }

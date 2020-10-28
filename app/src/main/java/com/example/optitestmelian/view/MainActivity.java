@@ -42,8 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initDialog() {
         TextView textView = new TextView(this);
-        // TODO: move in src/strings
-        textView.setText("Content is not valid. Click outside the dialog to dismiss this");
+        textView.setText(getString(R.string.alert_dialog_text));
 
         alertDialog = new Dialog(this);
         alertDialog.setContentView(textView);
